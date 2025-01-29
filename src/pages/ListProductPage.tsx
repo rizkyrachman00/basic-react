@@ -17,6 +17,7 @@ const ListProductPage = () => {
       <p>{searchParams.get("sort")}</p>
       <p>{searchParams.get("price")}</p>
 
+
       <button onClick={() => handleSortParams("asc-price")}>Sort Asc</button>
       <button onClick={() => handleSortParams("desc-price")}>Sort Desc</button>
     </>

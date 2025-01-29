@@ -11,9 +11,20 @@ const HomePage = () => {
 
   return (
     <>
-      <h1>Ini halaman Homepage</h1>
+      <h1>Selamat Datang Di Halaman Depan</h1>
 
-      <Link to="/terms">Klik disini untuk ke Halaman Term</Link>
+      <div
+        style={{
+          display: "flex",
+          gap: "15px",
+          justifyContent: "center",
+          marginBottom: "10px",
+        }}
+      >
+        <Link to="/product">Klik disini untuk ke Halaman Produk</Link>
+        <Link to="/about">Halaman About</Link>
+        <Link to="/contact">Halaman Kontak</Link>
+      </div>
 
       <button onClick={handleNavigateToTerms}>Link Terms Page</button>
     </>

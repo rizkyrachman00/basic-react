@@ -6,7 +6,7 @@ const ProductDetailPage = () => {
   return (
     <>
       <h1>Ini halaman Detail Produk</h1>
-      <p>{params.slug}</p>
+      <h1>{params.slug}</h1>
     </>
   );
 };
