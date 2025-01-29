@@ -2,6 +2,7 @@ import Welcome from "./components/Welcome.tsx";
 import HeaderCustom from "./components/HeaderCustom.tsx";
 import ProfileCard from "./components/ProfileCard.tsx";
 import Counter from "./components/Counter.tsx";
+import LikeButton from "./components/LikeButton.tsx";
 
 import "./App.css";
 
@@ -43,6 +44,7 @@ function App() {
 
       <Welcome />
       <Counter />
+      <LikeButton />
 
       {/* {
         // [
