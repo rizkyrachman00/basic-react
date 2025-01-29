@@ -3,8 +3,15 @@ import HeaderCustom from "./components/HeaderCustom.tsx";
 import ProfileCard from "./components/ProfileCard.tsx";
 import Counter from "./components/Counter.tsx";
 import LikeButton from "./components/LikeButton.tsx";
+import { Routes, Route } from "react-router";
 
 import "./App.css";
+import HomePage from "./pages/HomePage.tsx";
+import TermPage from "./pages/TermPage.tsx";
+import NotFoundPage from "./pages/NotFoundPage.tsx";
+import ProductPage from "./pages/ProductPage.tsx";
+import ProductDetailPage from "./pages/ProductDetailPage.tsx";
+import ListProductPage from "./pages/ListProductPage.tsx";
 
 type Lecturer = {
   nama?: string;
@@ -39,32 +46,49 @@ const teachers: Lecturer[] = [
 
 function App() {
   return (
-    <div style={{ padding: "16px 32px" }}>
-      <HeaderCustom />
+    <>
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/terms" element={<TermPage />} />
 
-      <Welcome />
-      <Counter />
-      <LikeButton />
 
-      {/* {
-        // [
-        //   <ProfileCard nama="rizky" birth="Juni 2000" job="Progammer" />,
-        //   <ProfileCard />,
-        //   <ProfileCard />,
-        //   <ProfileCard />,
-        // ]
-        teachers.map((teacher) => {
-          return (
-            <ProfileCard
-              nama={teacher.nama}
-              birth={teacher.birth}
-              job={teacher.job}
-              id={teacher.id}
-            />
-          );
-        })
-      } */}
-    </div>
+
+        
+        <Route path="/list-product-page" element={<ListProductPage />} />
+        {/* <Route path="/product" element={<ProductPage />} /> */}
+        <Route path="/product/:slug" element={<ProductDetailPage />} />
+        <Route path="/*" element={<NotFoundPage />} />
+      </Routes>
+    </>
+
+    // <div style={{ padding: "16px 32px" }}>
+    //   <HeaderCustom />
+
+    //   <Welcome />
+    //   <Counter />
+    //   <LikeButton />
+
+    //   {/* {
+    //     // [
+    //     //   <ProfileCard nama="rizky" birth="Juni 2000" job="Progammer" />,
+    //     //   <ProfileCard />,
+    //     //   <ProfileCard />,
+    //     //   <ProfileCard />,
+    //     // ]
+    //     teachers.map((teacher) => {
+    //       return (
+    //         <ProfileCard
+    //           nama={teacher.nama}
+    //           birth={teacher.birth}
+    //           job={teacher.job}
+    //           id={teacher.id}
+    //         />
+    //       );
+    //     })
+    //   } */}
+    // </div>
+
+    //  routing react
   );
 }
 
