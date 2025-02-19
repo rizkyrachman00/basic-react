@@ -15,6 +15,7 @@ import ListProductPage from "./pages/ListProductPage.tsx";
 import ContactPage from "./pages/ContactPage.tsx";
 import AboutPage from "./pages/AboutPage.tsx";
 import FormPage from "./pages/FormPage.tsx";
+import RHFPage from "./pages/RHFPage.tsx";
 
 type Lecturer = {
   nama?: string;
@@ -63,7 +64,8 @@ function App() {
         <Route path="/product/:slug" element={<ProductDetailPage />} />
 
         <Route path="/form" element={<FormPage />} />
-        
+        <Route path="/rhf" element={<RHFPage />} />
+
         <Route path="/*" element={<NotFoundPage />} />
       </Routes>
     </>

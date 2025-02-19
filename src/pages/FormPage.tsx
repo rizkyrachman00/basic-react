@@ -7,6 +7,7 @@ const FormPage = () => {
   // Uncontrolled component/input
   const inputRef = useRef<HTMLInputElement>(null);
   const inputEmailRef = useRef<HTMLInputElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
 
   // controlled component/input
   const [usernameInput, setUsernameInput] = useState("");
