@@ -14,6 +14,7 @@ import ProductDetailPage from "./pages/ProductDetailPage.tsx";
 import ListProductPage from "./pages/ListProductPage.tsx";
 import ContactPage from "./pages/ContactPage.tsx";
 import AboutPage from "./pages/AboutPage.tsx";
+import FormPage from "./pages/FormPage.tsx";
 
 type Lecturer = {
   nama?: string;
@@ -49,7 +50,7 @@ const teachers: Lecturer[] = [
 function App() {
   return (
     <>
-      <HeaderCustom /> 
+      <HeaderCustom />
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/product" element={<ProductPage />} />
@@ -60,6 +61,9 @@ function App() {
 
         <Route path="/list-product-page" element={<ListProductPage />} />
         <Route path="/product/:slug" element={<ProductDetailPage />} />
+
+        <Route path="/form" element={<FormPage />} />
+        
         <Route path="/*" element={<NotFoundPage />} />
       </Routes>
     </>
