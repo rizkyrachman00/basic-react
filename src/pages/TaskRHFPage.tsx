@@ -23,11 +23,10 @@ const TaskRHFPage = () => {
     resolver: zodResolver(registerSchema),
   });
 
-  const handleFormSubmit = (values: RegisterFormSchema) => {
-    alert("Form Telah Berhasil Submit");
-    console.log(values);
+  const [cards, setCards] = useState<RegisterFormSchema[]>([]);
 
-    form.setValue("name", "");
+  const handleFormSubmit = (values: RegisterFormSchema) => {
+    setCards((prevCards) => [...prevCards, values]);
   };
 
   return (
@@ -78,6 +77,26 @@ const TaskRHFPage = () => {
 
         <button type="submit">Submit</button>
       </form>
+
+      {cards.map((card, index) => (
+        <div>
+          <div
+            key={index}
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              padding: "40px",
+              width: "200px",
+              marginTop: "10px",
+              backgroundColor: "#8ecae6",
+            }}
+          >
+            <p style={{ textAlign: "start" }}>Name : {card.name} </p>
+            <p style={{ textAlign: "start" }}>Email : {card.email} </p>
+            <p style={{ textAlign: "start" }}>Age : {card.age} </p>
+          </div>
+        </div>
+      ))}
     </div>
   );
 };
