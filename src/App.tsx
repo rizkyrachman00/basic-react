@@ -16,6 +16,7 @@ import ContactPage from "./pages/ContactPage.tsx";
 import AboutPage from "./pages/AboutPage.tsx";
 import FormPage from "./pages/FormPage.tsx";
 import RHFPage from "./pages/RHFPage.tsx";
+import TaskRHFPage from "./pages/TaskRHFPage.tsx";
 
 type Lecturer = {
   nama?: string;
@@ -65,6 +66,8 @@ function App() {
 
         <Route path="/form" element={<FormPage />} />
         <Route path="/rhf" element={<RHFPage />} />
+
+        <Route path="/task-rhf" element={<TaskRHFPage />} />
 
         <Route path="/*" element={<NotFoundPage />} />
       </Routes>

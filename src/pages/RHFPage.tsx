@@ -17,6 +17,8 @@ const registerFormSchema = z
     password: z.string().min(8, { message: "Minimal 8 karakter" }),
     repeatPassword: z.string(),
     age: z.coerce.number().min(18),
+    gender: z.enum(["male", "female"]),
+    isPregnant: z.boolean().optional(),
     dob: z.coerce.date().min(new Date()).optional(),
   })
   .superRefine((arg, ctx) => {
@@ -129,6 +131,24 @@ const RHFPage = () => {
         <span style={{ color: "red" }}>
           {form.formState.errors.dob?.message}
         </span>
+
+        <label>
+          Gender :
+          <select {...form.register("gender")}>
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+          </select>
+        </label>
+        <span style={{ color: "red" }}>
+          {form.formState.errors.gender?.message}
+        </span>
+
+        {form.watch("gender") === "female" && (
+          <label>
+            is Pregnant :
+            <input type="checkbox" {...form.register("isPregnant")} />
+          </label>
+        )}
 
         <button type="submit" style={{ width: "fit-content" }}>
           Register User
