@@ -1,25 +1,39 @@
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useState } from "react";
 
 // type RegisterFormSchema = {
 //   username: string;
 //   password: string;
 // };
 
-const registerFormSchema = z.object({
-  username: z
-    .string()
-    .min(3, { message: "Minimal 3 karakter" })
-    .max(10, { message: "Maksimal 10 karakter" }),
-  password: z.string().min(8, { message: "Minimal 8 karakter" }),
-  age: z.coerce.number().min(18),
-  dob: z.coerce.date().optional(),
-});
+const registerFormSchema = z
+  .object({
+    username: z
+      .string()
+      .min(3, { message: "Minimal 3 karakter" })
+      .max(10, { message: "Maksimal 10 karakter" }),
+    password: z.string().min(8, { message: "Minimal 8 karakter" }),
+    repeatPassword: z.string(),
+    age: z.coerce.number().min(18),
+    dob: z.coerce.date().min(new Date()).optional(),
+  })
+  .superRefine((arg, ctx) => {
+    if (arg.password !== arg.repeatPassword) {
+      ctx.addIssue({
+        code: "custom",
+        path: ["repeatPassword"],
+        message: "Password tidak sama",
+      });
+    }
+  });
 
 type RegisterFormSchema = z.infer<typeof registerFormSchema>;
 
 const RHFPage = () => {
+  const [showPassword, setShowPassword] = useState(false);
+
   // merupakan schema dari react hook form agar muncul suggestion
   // const form = useForm<{
   //   username: string;
@@ -72,11 +86,33 @@ const RHFPage = () => {
 
         <label>
           Password :
-          <input type="password" {...form.register("password")} />
+          <input
+            type={showPassword ? "text" : "password"}
+            {...form.register("password")}
+          />
         </label>
         <span style={{ color: "red" }}>
           {form.formState.errors.password?.message}
         </span>
+
+        <label>
+          Repeat Password :
+          <input
+            type={showPassword ? "text" : "password"}
+            {...form.register("repeatPassword")}
+          />
+        </label>
+        <span style={{ color: "red" }}>
+          {form.formState.errors.repeatPassword?.message}
+        </span>
+
+        <label>
+          <input
+            type="checkbox"
+            onChange={(e) => setShowPassword(e.target.checked)}
+          />
+          Show Password
+        </label>
 
         <label>
           Age :
