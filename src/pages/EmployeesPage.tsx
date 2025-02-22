@@ -7,17 +7,25 @@ type Employee = {
 
 const EmployeesPage = () => {
   const [employees, setEmpoyees] = useState<Employee[]>([]);
+  const [employeesIsLoading, setEmployeesIsLoading] = useState(false);
 
   const fetchEmployees = async () => {
-    const response = await fetch("http://localhost:2000/employees", {
-      method: "GET",
-    });
+    try {
+      setEmployeesIsLoading(true);
 
-    const responseJson = (await response.json()) as Employee[]; //array of objects
+      const response = await fetch("http://localhost:2000/employees", {
+        method: "GET",
+      });
 
-    setEmpoyees(responseJson);
+      const responseJson = (await response.json()) as Employee[]; //array of objects
 
-    console.log(responseJson);
+      setEmpoyees(responseJson);
+      console.log(responseJson);
+    } catch (e) {
+      alert("Gagal mendapat data employee" + " || " + e);
+    } finally {
+      setEmployeesIsLoading(false);
+    }
   };
 
   return (
@@ -41,8 +49,11 @@ const EmployeesPage = () => {
           })}
         </tbody>
       </table>
-
-      <button onClick={fetchEmployees}>Fetch Employees API</button>
+      <button disabled={employeesIsLoading} onClick={fetchEmployees}>
+        Fetch Employees API
+      </button>
+      {employeesIsLoading && <p>Loading ....</p>}
+      {/* {employeesIsLoading ? <p>Loading ....</p> : null} */}
     </div>
   );
 };
