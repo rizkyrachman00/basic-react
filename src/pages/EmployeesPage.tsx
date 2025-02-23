@@ -1,32 +1,7 @@
-import { useState } from "react";
-
-type Employee = {
-  id: number;
-  name: string;
-};
+import { useFetchEmployees } from "../api/useFetchEmployees";
 
 const EmployeesPage = () => {
-  const [employees, setEmpoyees] = useState<Employee[]>([]);
-  const [employeesIsLoading, setEmployeesIsLoading] = useState(false);
-
-  const fetchEmployees = async () => {
-    try {
-      setEmployeesIsLoading(true);
-
-      const response = await fetch("http://localhost:2000/employees", {
-        method: "GET",
-      });
-
-      const responseJson = (await response.json()) as Employee[]; //array of objects
-
-      setEmpoyees(responseJson);
-      console.log(responseJson);
-    } catch (e) {
-      alert("Gagal mendapat data employee" + " || " + e);
-    } finally {
-      setEmployeesIsLoading(false);
-    }
-  };
+  const { data, errorMessage, isLoading, fetchEmployees } = useFetchEmployees();
 
   return (
     <div>
@@ -39,20 +14,21 @@ const EmployeesPage = () => {
           </tr>
         </thead>
         <tbody>
-          {employees.map((employee) => {
+          {data.map((data) => {
             return (
-              <tr key={employee.id}>
-                <td>{employee.id}</td>
-                <td>{employee.name}</td>
+              <tr key={data.id}>
+                <td>{data.id}</td>
+                <td>{data.name}</td>
               </tr>
             );
           })}
         </tbody>
       </table>
-      <button disabled={employeesIsLoading} onClick={fetchEmployees}>
+      <button disabled={isLoading} onClick={fetchEmployees}>
         Fetch Employees API
       </button>
-      {employeesIsLoading && <p>Loading ....</p>}
+      {isLoading && <p>Loading ....</p>}
+      {errorMessage && <p style={{ color: "red" }}>{errorMessage}</p>}
       {/* {employeesIsLoading ? <p>Loading ....</p> : null} */}
     </div>
   );
