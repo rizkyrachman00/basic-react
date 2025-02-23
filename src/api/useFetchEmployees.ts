@@ -1,7 +1,8 @@
 import { useState } from "react";
+import { axiosInstance } from "../lib/axios";
 
 type EmployeeResponse = {
-  id: number;
+  id: string;
   name: string;
 };
 
@@ -14,14 +15,18 @@ export const useFetchEmployees = () => {
     try {
       setEmployeesIsLoading(true);
 
-      const response = await fetch("http://localhost:2000/employees", {
-        method: "GET",
-      });
+      // const response = await fetch("http://localhost:2000/employees", {
+      //   method: "GET",
+      // });
 
-      const responseJson = (await response.json()) as EmployeeResponse[]; //array of objects
+      // const responseJson = (await response.json()) as EmployeeResponse[]; //array of objects
 
-      setEmpoyees(responseJson);
-      console.log(responseJson);
+      // const response = await axios.get<EmployeeResponse[]>("http://localhost:2000/employees");
+
+      const response = await axiosInstance.get<EmployeeResponse[]>("/employees");
+
+      setEmpoyees(response.data);
+      // console.log(responseJson);
     } catch (e) {
       // setEmployeesError("Gagal mendapat data employee")
       // alert("Gagal mendapat data employee" + " || " + e);

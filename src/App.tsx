@@ -1,8 +1,4 @@
-import Welcome from "./components/Welcome.tsx";
 import HeaderCustom from "./components/HeaderCustom.tsx";
-import ProfileCard from "./components/ProfileCard.tsx";
-import Counter from "./components/Counter.tsx";
-import LikeButton from "./components/LikeButton.tsx";
 import { Routes, Route } from "react-router";
 
 import "./App.css";
