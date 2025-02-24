@@ -2,23 +2,23 @@
   "employees": [
     {
       "id": "1",
-      "name": "rizky"
+      "name": "rizky",
+      "job": "jangkrik"
     },
     {
       "id": "2",
-      "name": "budi"
+      "name": "budi",
+      "job": "Programmer"
     },
     {
       "id": "3",
-      "name": "Aaril"
+      "name": "Aaril",
+      "job": "Programmer"
     },
     {
       "id": "4",
-      "name": "john doe"
-    },
-    {
-      "id": "4fd9",
-      "name": "donat"
+      "name": "john doe",
+      "job": "Programmer"
     }
   ],
   "products": [],
